@@ -13,7 +13,7 @@ web-build/
 passwords.md
 certs
 credentials.json
-/src/extra/
+extra/
 # macOS
 .DS_Store
 
