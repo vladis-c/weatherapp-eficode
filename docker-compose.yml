@@ -11,3 +11,11 @@ services:
     environment:
       APPID: ${APPID}
       MAP_ENDPOINT: ${MAP_ENDPOINT}
+  frontend:
+    build: ./frontend
+    container_name: frontend_c
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
