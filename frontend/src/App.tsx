@@ -1,6 +1,6 @@
-import './App.css'
+import './styles/globals.css'
 
-function App() {
+const App = () => {
   return <div className="App">Check 3</div>
 }
 
