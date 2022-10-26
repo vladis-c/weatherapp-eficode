@@ -14,6 +14,8 @@ passwords.md
 certs
 credentials.json
 extra/
+myreadme.md
+.env
 # macOS
 .DS_Store
 

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    container_name: backend_c
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
+    environment:
+      APPID: ${APPID}
+      MAP_ENDPOINT: ${MAP_ENDPOINT}
