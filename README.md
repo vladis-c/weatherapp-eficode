@@ -30,7 +30,7 @@ Before starting you need to get yourself an API key (by default you should set i
 3. Run command line command `docker-compose up -d`
 4. The service is now up and running!
     - Backend is now running in http://localhost:9000
-    - And demo frontend in http://localhost:8000
+    - And demo frontend in http://localhost:3000
 
 ### Choosing the frontend framework
 One of the first decisions you have to make is to choose a frontend framework to

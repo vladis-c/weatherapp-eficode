@@ -2,7 +2,7 @@ FROM node:16.18.0-alpine
 
 RUN npm install -g nodemon
 
-WORKDIR /backend_app
+WORKDIR /backend
 
 COPY package.json .
 
