@@ -13,7 +13,9 @@ web-build/
 passwords.md
 certs
 credentials.json
-/src/extra/
+extra/
+myreadme.md
+.env
 # macOS
 .DS_Store
 
