@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Typography } from '@mui/material'
 
-import Layout from '../Layout/Layout'
-import { PagesNamesEnum } from '../../enums/enums'
-import { useAppDispatch } from '../../hooks/redux-hooks'
-import { fetchWeatherCityName, fetchWeatherCurrentLocation } from '../../redux/slices/weatherSlice'
-import { dummy_data } from '../../data/dummy-data'
+import Layout from '../components/Layout/Layout'
+import { PagesNamesEnum } from '../enums/enums'
+import { useAppDispatch } from '../hooks/redux-hooks'
+import {
+  fetchWeatherCityName,
+  fetchWeatherCurrentLocation,
+} from '../redux/slices/weatherSlice'
+import { dummy_data } from '../data/dummy-data'
 
 const HomePage = () => {
   const currentWeatherData = dummy_data

@@ -7,6 +7,7 @@ export type ThemeColorsType = {
 export type PagesNamesType = {
   title: PagesNamesEnum
   icon: JSX.Element
+  link: string
 }
 
 export type LocationType = {
