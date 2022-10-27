@@ -3,7 +3,7 @@ import Router from 'koa-router';
 import fetch from 'node-fetch';
 import cors from 'kcors';
 
-const appId = process.env.APPID || 'f37c813cac355aa1320e169f0b54cff0';
+const appId = process.env.APPID || '';
 const mapURI = process.env.MAP_ENDPOINT || 'https://api.openweathermap.org/data/2.5';
 const targetCity = process.env.TARGET_CITY || 'Helsinki,fi';
 
@@ -28,14 +28,14 @@ const fetchWeatherByCoordinates = async (lon, lat) => {
 };
 
 const fetchForecastByCoordinates = async (lon, lat) => {
-  const endpoint = `${mapURI}/forecast?lat=${lat}&lon=${lon}&appid=${appId}&units=metric`;
+  const endpoint = `${mapURI}/forecast?lat=${lat}&lon=${lon}&appid=${appId}&units=metric=&exclude=minutely`;
   const response = await fetch(endpoint);
 
   return response ? response.json() : {};
 };
 
 const fetchForecast = async (requestCity) => {
-  const endpoint = `${mapURI}/forecast?q=${requestCity ? requestCity : targetCity}&appid=${appId}&cnt=3&units=metric`;
+  const endpoint = `${mapURI}/forecast?q=${requestCity ? requestCity : targetCity}&appid=${appId}&units=metric&exclude=minutely`;
   const response = await fetch(endpoint);
 
   return response ? response.json() : {};
@@ -53,7 +53,7 @@ router.get('/api/weatherbycoordinates', async ctx => {
     const { lon, lat } = ctx.request.query;
     const weatherData = await fetchWeatherByCoordinates(lon, lat);
     ctx.type = 'application/json; charset=utf-8';
-    ctx.body = weatherData.weather ? weatherData : {};
+    ctx.body = weatherData ? weatherData : {};
   }
 });
 
@@ -62,12 +62,7 @@ router.get('/api/forecastbycoordinates', async ctx => {
     const { lon, lat, } = ctx.request.query;
     const weatherData = await fetchForecastByCoordinates(lon, lat);
     ctx.type = 'application/json; charset=utf-8';
-    ctx.body = weatherData.list
-      ? {
-        weather: weatherData.list[1].weather[0],
-        time: weatherData.list[1].dt_txt,
-      }
-      : {};
+    ctx.body = weatherData ? weatherData : {};
   }
 });
 
@@ -75,12 +70,7 @@ router.get('/api/forecast', async ctx => {
   const { city } = ctx.request.query;
   const weatherData = await fetchForecast(city);
   ctx.type = 'application/json; charset=utf-8';
-  ctx.body = weatherData.list
-    ? {
-      weather: weatherData.list[1].weather[0],
-      time: weatherData.list[1].dt_txt,
-    }
-    : {};
+  ctx.body = weatherData ? weatherData : {};
 });
 
 app.use(router.routes());
