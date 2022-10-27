@@ -3,8 +3,8 @@ import Router from 'koa-router';
 import fetch from 'node-fetch';
 import cors from 'kcors';
 
-const appId = process.env.APPID || '';
-const mapURI = process.env.MAP_ENDPOINT || 'http://api.openweathermap.org/data/2.5';
+const appId = process.env.APPID || 'f37c813cac355aa1320e169f0b54cff0';
+const mapURI = process.env.MAP_ENDPOINT || 'https://api.openweathermap.org/data/2.5';
 const targetCity = process.env.TARGET_CITY || 'Helsinki,fi';
 
 const port = process.env.PORT || 9000;
@@ -49,8 +49,8 @@ router.get('/api/weatherbycity', async ctx => {
 });
 
 router.get('/api/weatherbycoordinates', async ctx => {
-  if (ctx.request.query.lon && ctx.request.query.lat) {
-    const { lon, lat, } = ctx.request.query;
+  if (ctx.request.query.lon && ctx.request.query.lat) {    
+    const { lon, lat } = ctx.request.query;
     const weatherData = await fetchWeatherByCoordinates(lon, lat);
     ctx.type = 'application/json; charset=utf-8';
     ctx.body = weatherData.weather ? weatherData : {};

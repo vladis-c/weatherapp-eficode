@@ -1,0 +1,28 @@
+export const dummy_data = {
+  base: 'stations',
+  clouds: { all: 0 },
+  cod: 200,
+  coord: { lon: -98, lat: 38 },
+  dt: 1666863003,
+  id: 4279645,
+  main: {
+    feels_like: 6.72,
+    humidity: 61,
+    pressure: 1015,
+    temp: 9.5,
+    temp_max: 9.95,
+    temp_min: 7.48,
+  },
+  name: 'South Hutchinson',
+  sys: {
+    type: 2,
+    id: 2005053,
+    country: 'US',
+    sunrise: 1666875146,
+    sunset: 1666913943,
+  },
+  timezone: -18000,
+  visibility: 10000,
+  weather: [{ id: 800, main: 'Clear', description: 'clear sky', icon: '01n' }],
+  wind: { speed: 5.66, deg: 140 },
+}
