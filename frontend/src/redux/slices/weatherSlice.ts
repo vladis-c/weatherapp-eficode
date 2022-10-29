@@ -46,7 +46,7 @@ const initialStateOfWeatherData = {
 const initialStateOfLocation = {
   lat: 0,
   lon: 0,
-  city: '',
+  city: 'Helsinki',
 }
 
 const initialState: WeatherSliceInitialState = {

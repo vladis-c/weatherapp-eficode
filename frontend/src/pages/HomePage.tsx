@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { useGeolocated } from 'react-geolocated'
+import { Alert } from '@mui/material'
+import { isMobile } from 'react-device-detect'
 
 import Layout from '../components/Layout/Layout'
 import { PagesNamesEnum } from '../enums/enums'
@@ -11,7 +13,6 @@ import {
   setLocation,
 } from '../redux/slices/weatherSlice'
 import { roundNumberToPrecision } from '../helpers/helper-functions'
-import { Alert } from '@mui/material'
 
 const HomePage = () => {
   const dispatch = useAppDispatch()
@@ -39,11 +40,19 @@ const HomePage = () => {
   }, [coords])
 
   useEffect(() => {
+    //if Desktop it is gonna check first for coordinates and then fetch data.
     if (currentLocation?.lat && currentLocation?.lon) {
       dispatch(fetchWeatherCurrentLocation())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLocation])
+
+  useEffect(() => {
+    //if moblie it is gonna fetch data with default city Helsinki due to no location on mobile browsers in Dev environment.
+    if (process.env.NODE_ENV === 'development' && isMobile) {
+      dispatch(fetchWeatherCurrentLocation())
+    }
+  }, [])
 
   return (
     <>
@@ -57,9 +66,7 @@ const HomePage = () => {
         </Alert>
       ) : null}
       {!isGeolocationEnabled ? (
-        <Alert severity="warning">
-          Geolocation is not enabled
-        </Alert>
+        <Alert severity="warning">Geolocation is not enabled</Alert>
       ) : null}
     </>
   )

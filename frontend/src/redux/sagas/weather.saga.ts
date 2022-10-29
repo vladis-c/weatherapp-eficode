@@ -13,7 +13,6 @@ import {
   fetchForecastCurrentLocation,
   fetchForecastCurrentLocationFailed,
   fetchForecastCurrentLocationSuccess,
-  setLocation,
   fetchForecastCityName,
   fetchForecastCityNameFailed,
   fetchForecastCityNameSuccess,
@@ -23,11 +22,13 @@ import { RootState } from '../store'
 function* fetchWeatherCurrentLocationSaga() {
   const { weatherSlice }: RootState = yield select()
   const { currentLocation } = weatherSlice
+  const { lon, lat } = currentLocation
+  const endpoint = lat && lon ? ApiEndpointsEnum.COORDS : ApiEndpointsEnum.CITY
   try {
     const data: WeatherDataType = yield call(
       fetchWeatherFromApi,
       currentLocation,
-      ApiEndpointsEnum.COORDS
+      endpoint
     )
     yield put(fetchWeatherCurrentLocationSuccess(data))
     yield put(fetchForecastCurrentLocation())
@@ -46,11 +47,14 @@ function* fetchWeatherCurrentLocationWatcher() {
 function* fetchForecastCurrentLocationSaga() {
   const { weatherSlice }: RootState = yield select()
   const { currentLocation } = weatherSlice
+  const { lon, lat } = currentLocation
+  const endpoint =
+    lat && lon ? ApiEndpointsEnum.FORECAST_COORDS : ApiEndpointsEnum.FORECAST
   try {
     const data: WeatherDataType[] = yield call(
       fetchWeatherFromApi,
       currentLocation,
-      ApiEndpointsEnum.FORECAST_COORDS
+      endpoint
     )
     yield put(fetchForecastCurrentLocationSuccess(data))
   } catch (error) {

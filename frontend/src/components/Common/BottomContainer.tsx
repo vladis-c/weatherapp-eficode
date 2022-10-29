@@ -1,6 +1,7 @@
 import { Typography, Box, Avatar } from '@mui/material'
 import AppsIcon from '@mui/icons-material/Apps'
 import { isMobile } from 'react-device-detect'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import { dummy_forecast } from '../../data/dummy-data'
 import {
@@ -31,64 +32,74 @@ const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
     ? locationData.slice(0, 5)
     : locationData.slice(0, 8)
 
-  return (
-    <HalfContainer bgColor={colors.grey} bottom={true}>
-      <Box sx={styles.hourlyContainer}>
-        {forecastToDisplay.map(({ dt_txt, dt, weather, main, wind }) => (
-          <Box key={dt} sx={styles.hourlyWeather}>
-            <Typography sx={styles.titleSm}>
-              {dt_txt && doTime(dt_txt)}
-            </Typography>
-            <Avatar
-              sx={styles.weatherIcon}
-              alt="img"
-              src={
-                weather[0]?.icon
-                  ? `http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`
-                  : ''
-              }
-            />
-            <Typography sx={styles.titleSm}>
-              {roundNumber(main?.temp) > 0
-                ? `+${roundNumber(main?.temp)}`
-                : `${roundNumber(main?.temp)}`}
-            </Typography>
-
-            <Box sx={styles.sectionContainer}>
-              <CustomWindIcon direction={doWindDirection(wind.deg)} />
-              <Typography sx={{ ...styles.titleSm, pt: 1 }}>
-                {roundNumber(wind.speed)}
-              </Typography>
-              <Typography sx={styles.titleXxs}>
-                {doWindDirection(wind.deg)}
-              </Typography>
-            </Box>
-            <Box sx={styles.sectionContainer2}>
-              <AppsIcon sx={styles.humidityIcon} />
+  if (locationData.length === 0) {
+    return (
+      <HalfContainer bgColor={colors.grey}>
+        <CircularProgress
+          sx={{ color: colors.winter, width: 200, height: 200 }}
+        />
+      </HalfContainer>
+    )
+  } else {
+    return (
+      <HalfContainer bgColor={colors.grey} bottom={true}>
+        <Box sx={styles.hourlyContainer}>
+          {forecastToDisplay.map(({ dt_txt, dt, weather, main, wind }) => (
+            <Box key={dt} sx={styles.hourlyWeather}>
               <Typography sx={styles.titleSm}>
-                {roundNumber(main.humidity)}
+                {dt_txt && doTime(dt_txt)}
               </Typography>
-            </Box>
-            <Box sx={styles.sectionContainer2}>
-              <Box
-                sx={{
-                  width: 60,
-                  height: roundNumber(doPressure(main.pressure)) - 710,
-                  backgroundColor: colors.cyan,
-                }}
+              <Avatar
+                sx={styles.weatherIcon}
+                alt="img"
+                src={
+                  weather[0]?.icon
+                    ? `http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`
+                    : ''
+                }
               />
               <Typography sx={styles.titleSm}>
-                {roundNumber(doPressure(main.pressure))}
+                {roundNumber(main?.temp) > 0
+                  ? `+${roundNumber(main?.temp)}`
+                  : `${roundNumber(main?.temp)}`}
               </Typography>
+
+              <Box sx={styles.sectionContainer}>
+                <CustomWindIcon direction={doWindDirection(wind.deg)} />
+                <Typography sx={{ ...styles.titleSm, pt: 1 }}>
+                  {roundNumber(wind.speed)}
+                </Typography>
+                <Typography sx={styles.titleXxs}>
+                  {doWindDirection(wind.deg)}
+                </Typography>
+              </Box>
+              <Box sx={styles.sectionContainer2}>
+                <AppsIcon sx={styles.humidityIcon} />
+                <Typography sx={styles.titleSm}>
+                  {roundNumber(main.humidity)}
+                </Typography>
+              </Box>
+              <Box sx={styles.sectionContainer2}>
+                <Box
+                  sx={{
+                    width: 60,
+                    height: roundNumber(doPressure(main.pressure)) - 710,
+                    backgroundColor: colors.cyan,
+                  }}
+                />
+                <Typography sx={styles.titleSm}>
+                  {roundNumber(doPressure(main.pressure))}
+                </Typography>
+              </Box>
             </Box>
-          </Box>
-        ))}
-      </Box>
-      <TextDivider text={`Wind speed, m/s`} b={{ md: -55, sm: 2 }} />
-      <TextDivider text={`Humidity, %`} b={{ md: -115, sm: -48 }} />
-      <TextDivider text={`Pressure, mmHg`} b={{ md: -180, sm: -100 }} />
-    </HalfContainer>
-  )
+          ))}
+        </Box>
+        <TextDivider text={`Wind speed, m/s`} b={{ md: -55, sm: 2 }} />
+        <TextDivider text={`Humidity, %`} b={{ md: -115, sm: -48 }} />
+        <TextDivider text={`Pressure, mmHg`} b={{ md: -180, sm: -100 }} />
+      </HalfContainer>
+    )
+  }
 }
 
 const styles: MyStylesType = {

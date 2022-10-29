@@ -25,14 +25,13 @@ import { PagesNamesEnum } from '../../enums/enums'
 import { colors } from '../../styles/colors'
 import { PagesNamesType } from '../../types/types'
 
-
 const NavBar = () => {
   const [open, setOpen] = useState(false)
 
   const pages: PagesNamesType[] = [
     {
       title: PagesNamesEnum.CURRENT,
-      icon: <LocationOnIcon sx={{ color: colors.black}} />,
+      icon: <LocationOnIcon sx={{ color: colors.black }} />,
       link: '/',
     },
     {

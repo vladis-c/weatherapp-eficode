@@ -1,10 +1,10 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, CircularProgress } from '@mui/material'
 import {
   doDate,
   doWindDirection,
   roundNumber,
 } from '../../helpers/helper-functions'
-import type { MyStylesType, WeatherDataType } from '../../types/types'
+import type { MyStylesType } from '../../types/types'
 import HalfContainer from '../UI/HalfContainer'
 import SunContainer from '../Home/SunContainer'
 import { colors } from '../../styles/colors'
@@ -35,31 +35,47 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   const weatherDesc = weather[0].description
   const weatherWind = roundNumber(wind.speed)
 
-  return (
-    <HalfContainer bgColor={colors.cyan}>
-      {findLocationPage ? (
-        <TextSearch />
-      ) : (
-        <Typography sx={styles.mainTitle}>{name}</Typography>
-      )}
-      <Typography sx={styles.titleSm}>
-        {findLocationPage ? `${name},` : ''} {doDate(new Date().getTime())}
-      </Typography>
-      <Typography sx={styles.titleL}>
-        {temperature}
-        <Typography component="span" sx={styles.titleXs}>
-          {`°С`}
+ 
+
+  if ( locationData.name === "" ) {
+    return (
+      <HalfContainer bgColor={colors.cyan}>
+        <CircularProgress
+          sx={{ color: colors.winter, width: 200, height: 200 }}
+        />
+      </HalfContainer>
+    )
+  } else {
+    return (
+      <HalfContainer bgColor={colors.cyan}>
+        {findLocationPage ? (
+          <TextSearch />
+        ) : (
+          <Typography sx={styles.mainTitle}>{name}</Typography>
+        )}
+        <Typography sx={styles.titleSm}>
+          {findLocationPage ? `${name},` : ''} {doDate(new Date().getTime())}
         </Typography>
-      </Typography>
-      <SunContainer sunrise={sunrise} sunset={sunset} wIcon={weather[0].icon} />
-      <Typography sx={{ ...styles.titleSm, textTransform: 'capitalize' }}>
-        {weatherDesc}
-      </Typography>
-      <Typography sx={styles.titleSm}>
-        Wind {weatherWind} m/s from {doWindDirection(weatherWind)}
-      </Typography>
-    </HalfContainer>
-  )
+        <Typography sx={styles.titleL}>
+          {temperature}
+          <Typography component="span" sx={styles.titleXs}>
+            {`°С`}
+          </Typography>
+        </Typography>
+        <SunContainer
+          sunrise={sunrise}
+          sunset={sunset}
+          wIcon={weather[0].icon}
+        />
+        <Typography sx={{ ...styles.titleSm, textTransform: 'capitalize' }}>
+          {weatherDesc}
+        </Typography>
+        <Typography sx={styles.titleSm}>
+          Wind {weatherWind} m/s from {doWindDirection(weatherWind)}
+        </Typography>
+      </HalfContainer>
+    )
+  }
 }
 
 const styles: MyStylesType = {
