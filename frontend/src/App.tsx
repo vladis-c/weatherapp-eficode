@@ -9,6 +9,15 @@ const theme = createTheme({
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(','),    
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 400,
+      md: 800,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 })
 
 const App = () => {

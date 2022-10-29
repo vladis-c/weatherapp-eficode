@@ -1,14 +1,13 @@
 import React from 'react'
-import { isDesktop } from 'react-device-detect'
-
 import { colors } from '../../styles/colors'
-import Footer from './Footer'
 import NavBar from './NavBar'
 
 type LayoutProps = {
   children: React.ReactNode
   title: string
 }
+
+
 
 const Layout = ({ children, title }: LayoutProps) => {
   return (
@@ -30,16 +29,14 @@ const Layout = ({ children, title }: LayoutProps) => {
       <main
         style={{
           height: '100vh',
-          padding: '7rem 13rem',
           backgroundColor: colors.grey,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-start',
         }}
       >
         {children}
       </main>
-      {isDesktop ? <Footer /> : null}
     </div>
   )
 }

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
@@ -23,7 +24,7 @@ import { PagesNamesEnum } from '../../enums/enums'
 
 import { colors } from '../../styles/colors'
 import { PagesNamesType } from '../../types/types'
-import { Link } from 'react-router-dom'
+
 
 const NavBar = () => {
   const [open, setOpen] = useState(false)
@@ -31,17 +32,17 @@ const NavBar = () => {
   const pages: PagesNamesType[] = [
     {
       title: PagesNamesEnum.CURRENT,
-      icon: <LocationOnIcon sx={{ color: colors.winter }} />,
+      icon: <LocationOnIcon sx={{ color: colors.black}} />,
       link: '/',
     },
     {
       title: PagesNamesEnum.FIND,
-      icon: <EditLocationIcon sx={{ color: colors.winter }} />,
+      icon: <EditLocationIcon sx={{ color: colors.black }} />,
       link: '/find',
     },
     {
       title: PagesNamesEnum.FAVOURITE,
-      icon: <StarIcon sx={{ color: colors.winter }} />,
+      icon: <StarIcon sx={{ color: colors.black }} />,
       link: '/favourites',
     },
   ]

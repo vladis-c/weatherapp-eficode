@@ -1,3 +1,5 @@
+import { Theme } from '@emotion/react'
+import { SxProps } from '@mui/material'
 import { PagesNamesEnum } from '../enums/enums'
 
 export type ThemeColorsType = {
@@ -16,10 +18,16 @@ export type LocationType = {
   city?: string
 }
 
-export type WeatherDataType = {
-  coord: LocationType
-  weather: { id: number; main: string; description: string; icon: string }[]
-  base: string
+export interface WeatherDataType {
+  coord?: LocationType
+  weather: {
+    id: number
+    main: string
+    description: string
+    icon: string
+    [k: string]: any
+  }[]
+  base?: string
   main: {
     temp: number
     feels_like: number
@@ -27,20 +35,32 @@ export type WeatherDataType = {
     temp_max: number
     pressure: number
     humidity: number
+    sea_level?: number
+    grnd_level?: number
+    temp_kf?: number
   }
   visibility: number
-  wind: { speed: number; deg: number }
-  clouds: { all: number }
+  wind: { speed: number; deg: number; [k: string]: any }
+  clouds: { all: number; [k: string]: any } | number
   dt: number
   sys: {
-    type: number
-    id: number
-    country: string
-    sunrise: number
-    sunset: number
+    type?: number
+    id?: number
+    country?: string
+    sunrise?: number
+    sunset?: number
+    pod?: string
+    [k: string]: any
   }
-  timezone: number
-  id: number
-  name: string
-  cod: number
+  timezone?: number
+  id?: number
+  name?: string
+  cod?: number
+  pop?: number
+  dt_txt?: string
+  [k: string]: any
+}
+
+export interface MyStylesType {
+  [k: string]: SxProps<Theme>
 }
