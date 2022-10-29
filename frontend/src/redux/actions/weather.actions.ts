@@ -7,19 +7,21 @@ export const fetchWeatherFromApi = async (
   currentLocation: LocationType,
   endpoint: ApiEndpointsEnum
 ) => {
+
   const { lon, lat, city } = currentLocation
   const latestUrlpart = () => {
     if (endpoint === ApiEndpointsEnum.COORDS) {
-      return `lon=${lon}&lat=${lat}`
+      return `lon=${lon.toString()}&lat=${lat.toString()}`
     }
     if (endpoint === ApiEndpointsEnum.CITY) {
       return `city=${city}`
     }
   }
-
+const url = `${baseURL}/${endpoint}?${latestUrlpart()}`
+console.log("url", url)
   try {
     const response = await fetch(
-      `${baseURL}/weatherbycoordinates?${latestUrlpart()}`,
+      url,
       {
         method: 'GET',
         headers: {
@@ -30,6 +32,7 @@ export const fetchWeatherFromApi = async (
       }
     )
     const data: WeatherDataType = await response.json()
+    console.log('data', data)
     return data
   } catch (error) {
     console.log('fetchWeatherByCoordinates', error)

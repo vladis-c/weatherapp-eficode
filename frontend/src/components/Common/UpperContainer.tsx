@@ -4,24 +4,26 @@ import {
   doWindDirection,
   roundNumber,
 } from '../../helpers/helper-functions'
-import type { MyStylesType } from '../../types/types'
+import type { MyStylesType, WeatherDataType } from '../../types/types'
 import HalfContainer from '../UI/HalfContainer'
 import SunContainer from '../Home/SunContainer'
 import { colors } from '../../styles/colors'
 import { dummy_data } from '../../data/dummy-data'
 import TextSearch from '../FindLocation/TextSearch'
 import { PagesNamesEnum } from '../../enums/enums'
+import { useAppSelector } from '../../hooks/redux-hooks'
 
 const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   const findLocationPage = pageName === PagesNamesEnum.FIND
-  const currentLocationData = dummy_data
+  const { weatherSlice } = useAppSelector((state) => state)
+  // const currentLocationData = dummy_data
   const {
     name,
     main,
     sys: { sunrise, sunset },
     weather,
     wind,
-  } = currentLocationData
+  } = weatherSlice.currentLocationData
   const temp = roundNumber(main.temp)
   const temperature = temp > 0 ? `+${temp}` : `${temp}`
   const weatherDesc = weather[0].description

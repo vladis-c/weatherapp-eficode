@@ -53,7 +53,7 @@ router.get('/api/weatherbycoordinates', async ctx => {
     const { lon, lat } = ctx.request.query;
     const weatherData = await fetchWeatherByCoordinates(lon, lat);
     ctx.type = 'application/json; charset=utf-8';
-    ctx.body = weatherData ? weatherData.list : {};
+    ctx.body = weatherData ? weatherData : {};
   }
 });
 
@@ -70,7 +70,7 @@ router.get('/api/forecast', async ctx => {
   const { city } = ctx.request.query;
   const weatherData = await fetchForecast(city);
   ctx.type = 'application/json; charset=utf-8';
-  ctx.body = weatherData ? weatherData : {};
+  ctx.body = weatherData ? weatherData.list : {};
 });
 
 app.use(router.routes());

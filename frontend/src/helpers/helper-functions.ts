@@ -30,6 +30,10 @@ export const roundNumber = (t: number) => {
   return Math.round(t)
 }
 
+export const roundNumberToPrecision = (num: number) => {
+  return Math.round((num + Number.EPSILON) * 100) / 100
+}
+
 export const doWindDirection = (deg: number) => {
   if (deg >= 22.5 && deg < 67.5) {
     return WindEnum.NE
