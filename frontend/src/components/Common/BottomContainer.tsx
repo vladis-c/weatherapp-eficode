@@ -10,17 +10,26 @@ import {
   doPressure,
 } from '../../helpers/helper-functions'
 import { colors } from '../../styles/colors'
-import type { MyStylesType } from '../../types/types'
+import type { MyStylesType, WeatherDataType } from '../../types/types'
 import HalfContainer from '../UI/HalfContainer'
 import CustomWindIcon from '../UI/CustomWindIcon'
 import TextDivider from '../Home/TextDivider'
 import { PagesNamesEnum } from '../../enums/enums'
+import { useAppSelector } from '../../hooks/redux-hooks'
 
 const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
-  const currentLocationForecast = dummy_forecast
-  const forecastToDisplay = isMobile
-    ? currentLocationForecast.slice(0, 5)
-    : currentLocationForecast.slice(0, 8)
+  const findLocationPage = pageName === PagesNamesEnum.FIND
+  // const currentLocationForecast = dummy_forecast
+  const { weatherSlice } = useAppSelector((state) => state)
+  const { currentLocationForecast, requestedCityForecast } = weatherSlice
+  const locationData = findLocationPage
+    ? requestedCityForecast.length > 0
+      ? requestedCityForecast
+      : currentLocationForecast
+    : currentLocationForecast
+  const forecastToDisplay: WeatherDataType[] = isMobile
+    ? locationData.slice(0, 5)
+    : locationData.slice(0, 8)
 
   return (
     <HalfContainer bgColor={colors.grey} bottom={true}>
@@ -64,7 +73,7 @@ const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
               <Box
                 sx={{
                   width: 60,
-                  height: roundNumber(doPressure(main.pressure))  - 710,
+                  height: roundNumber(doPressure(main.pressure)) - 710,
                   backgroundColor: colors.cyan,
                 }}
               />
@@ -96,7 +105,7 @@ const styles: MyStylesType = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: "flex-end",
+    alignContent: 'flex-end',
     mt: 2,
   },
   weatherIcon: {

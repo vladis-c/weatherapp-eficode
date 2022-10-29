@@ -3,12 +3,13 @@ import { WeatherDataType, LocationType } from '../../types/types'
 
 export type WeatherSliceInitialState = {
   currentLocation: LocationType
-  newLocation: LocationType 
+  newLocation: LocationType
   currentLocationData: WeatherDataType
-  currentLocationForecast: WeatherDataType
+  currentLocationForecast: WeatherDataType[]
   requestedCityData: WeatherDataType
-  requestedCityForecast: WeatherDataType
+  requestedCityForecast: WeatherDataType[]
   error: string
+  success: boolean
   loading: boolean
 }
 
@@ -39,6 +40,7 @@ const initialStateOfWeatherData = {
   visibility: 0,
   weather: [{ id: 0, main: '', description: '', icon: '' }],
   wind: { speed: 0, deg: 0 },
+  dt_txt: '',
 }
 
 const initialStateOfLocation = {
@@ -51,10 +53,11 @@ const initialState: WeatherSliceInitialState = {
   currentLocation: initialStateOfLocation,
   newLocation: initialStateOfLocation,
   currentLocationData: initialStateOfWeatherData,
-  currentLocationForecast: initialStateOfWeatherData,
+  currentLocationForecast: [],
   requestedCityData: initialStateOfWeatherData,
-  requestedCityForecast: initialStateOfWeatherData,
+  requestedCityForecast: [],
   error: '',
+  success: false,
   loading: false,
 }
 
@@ -84,6 +87,25 @@ const weatherSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    fetchForecastCurrentLocation: (state) => {
+      state.loading = true
+      state.error = ''
+    },
+    fetchForecastCurrentLocationSuccess: (
+      state,
+      action: PayloadAction<WeatherDataType[]>
+    ) => {
+      state.currentLocationForecast = action.payload
+      state.loading = false
+      state.error = ''
+    },
+    fetchForecastCurrentLocationFailed: (
+      state,
+      action: PayloadAction<string>
+    ) => {
+      state.loading = false
+      state.error = action.payload
+    },
     fetchWeatherCityName: (state) => {
       state.loading = true
       state.error = ''
@@ -100,6 +122,22 @@ const weatherSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    fetchForecastCityName: (state) => {
+      state.loading = true
+      state.error = ''
+    },
+    fetchForecastCityNameSuccess: (
+      state,
+      action: PayloadAction<WeatherDataType[]>
+    ) => {
+      state.requestedCityForecast = action.payload
+      state.loading = false
+      state.error = ''
+    },
+    fetchForecastCityNameFailed: (state, action: PayloadAction<string>) => {
+      state.loading = false
+      state.error = action.payload
+    },
   },
 })
 
@@ -109,7 +147,13 @@ export const {
   fetchWeatherCityNameFailed,
   fetchWeatherCityNameSuccess,
   fetchWeatherCurrentLocation,
+  fetchForecastCurrentLocation,
+  fetchForecastCurrentLocationFailed,
+  fetchForecastCurrentLocationSuccess,
   fetchWeatherCurrentLocationSuccess,
   fetchWeatherCurrentLocationFailed,
+  fetchForecastCityName,
+  fetchForecastCityNameFailed,
+  fetchForecastCityNameSuccess
 } = weatherSlice.actions
 export default weatherSlice.reducer

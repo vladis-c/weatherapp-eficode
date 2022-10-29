@@ -16,6 +16,12 @@ import { useAppSelector } from '../../hooks/redux-hooks'
 const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   const findLocationPage = pageName === PagesNamesEnum.FIND
   const { weatherSlice } = useAppSelector((state) => state)
+  const { currentLocationData, requestedCityData } = weatherSlice
+  const locationData = findLocationPage
+    ? requestedCityData.name !== ''
+      ? requestedCityData
+      : currentLocationData
+    : currentLocationData
   // const currentLocationData = dummy_data
   const {
     name,
@@ -23,7 +29,7 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
     sys: { sunrise, sunset },
     weather,
     wind,
-  } = weatherSlice.currentLocationData
+  } = locationData
   const temp = roundNumber(main.temp)
   const temperature = temp > 0 ? `+${temp}` : `${temp}`
   const weatherDesc = weather[0].description

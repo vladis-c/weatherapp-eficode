@@ -2,10 +2,10 @@ import React from 'react'
 import {
   TextField,
   InputAdornment,
-  Button,
   Typography,
   IconButton,
 } from '@mui/material'
+import LoadingButton from '@mui/lab/LoadingButton'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
 import SearchIcon from '@mui/icons-material/Search'
 import ClearIcon from '@mui/icons-material/Clear'
@@ -19,11 +19,13 @@ import type { MyStylesType } from '../../types/types'
 import { colors } from '../../styles/colors'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks'
 import { setSearchLocationInput } from '../../redux/slices/historySlice'
+import { fetchWeatherCityName, setLocation } from '../../redux/slices/weatherSlice'
 
 const TextSearch = () => {
   const dispatch = useAppDispatch()
-  const { historySlice } = useAppSelector((state) => state)
-  const { searchLocationInput } = historySlice
+  const { historySlice, weatherSlice } = useAppSelector((state) => state)
+  const { searchLocationInput, favourites, recentSearchHistory } = historySlice
+  const { loading, currentLocation } = weatherSlice
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchLocationInput(e.target.value))
@@ -53,7 +55,8 @@ const TextSearch = () => {
                       }}
                     />
                   </IconButton>
-                  <Button
+                  <LoadingButton
+                    loading={loading}
                     variant="outlined"
                     sx={{
                       width: { md: 30, sm: 20 },
@@ -65,9 +68,18 @@ const TextSearch = () => {
                       borderColor: colors.grey,
                       borderWidth: 0.5,
                     }}
+                    onClick={() => {
+                      dispatch(
+                        setLocation({
+                          ...currentLocation,
+                          city: searchLocationInput,
+                        })
+                      )
+                      dispatch(fetchWeatherCityName())                      
+                    }}
                   >
                     Search
-                  </Button>
+                  </LoadingButton>
                 </InputAdornment>
               ),
               startAdornment: (
