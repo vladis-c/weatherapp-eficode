@@ -7,8 +7,6 @@ type LayoutProps = {
   title: string
 }
 
-
-
 const Layout = ({ children, title }: LayoutProps) => {
   return (
     <div>

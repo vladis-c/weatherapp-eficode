@@ -64,3 +64,9 @@ export interface WeatherDataType {
 export interface MyStylesType {
   [k: string]: SxProps<Theme>
 }
+
+export type CityType = {
+  name: string,
+  coord: LocationType,
+  id: number
+}

@@ -15,6 +15,7 @@ import hardSet from 'reduxjs-toolkit-persist/lib/stateReconciler/hardSet'
 import { PersistConfig } from 'reduxjs-toolkit-persist/lib/types'
 import { rootSaga } from './root-saga'
 import weatherSlice from './slices/weatherSlice'
+import historySlice from './slices/historySlice'
 
 const saga = createSagaMiddleware()
 
@@ -26,7 +27,7 @@ const rootPersistConfig: PersistConfig<string, Storage, any> = {
 
 const persistedReducer: Reducer<RootState, any> = persistCombineReducers(
   rootPersistConfig,
-  { weatherSlice }
+  { weatherSlice, historySlice }
 )
 
 export const store = configureStore({
@@ -48,5 +49,6 @@ saga.run(rootSaga)
 export const persistor = persistStore(store)
 export type RootState = {
   weatherSlice: ReturnType<typeof weatherSlice>
+  historySlice: ReturnType<typeof historySlice>
 }
 export type AppDispatch = typeof store.dispatch

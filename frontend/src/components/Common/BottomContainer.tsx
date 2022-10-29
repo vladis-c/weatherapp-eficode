@@ -13,9 +13,10 @@ import { colors } from '../../styles/colors'
 import type { MyStylesType } from '../../types/types'
 import HalfContainer from '../UI/HalfContainer'
 import CustomWindIcon from '../UI/CustomWindIcon'
-import TextDivider from './TextDivider'
+import TextDivider from '../Home/TextDivider'
+import { PagesNamesEnum } from '../../enums/enums'
 
-const BottomContainer = () => {
+const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   const currentLocationForecast = dummy_forecast
   const forecastToDisplay = isMobile
     ? currentLocationForecast.slice(0, 5)

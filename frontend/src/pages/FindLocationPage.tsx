@@ -1,12 +1,13 @@
-import { Typography } from "@mui/material"
-
+import BottomContainer from "../components/Common/BottomContainer"
+import UpperContainer from "../components/Common/UpperContainer"
 import Layout from "../components/Layout/Layout"
 import { PagesNamesEnum } from "../enums/enums"
 
 const FindLocationPage = () => {
   return (
     <Layout title={PagesNamesEnum.FIND}>
-      <Typography>{PagesNamesEnum.FIND}</Typography>
+      <UpperContainer pageName={PagesNamesEnum.FIND}/>
+      <BottomContainer pageName={PagesNamesEnum.FIND}/>
     </Layout>
   )
 }

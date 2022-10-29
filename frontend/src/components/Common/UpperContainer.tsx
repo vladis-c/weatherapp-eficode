@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import {
   doDate,
   doWindDirection,
@@ -6,11 +6,14 @@ import {
 } from '../../helpers/helper-functions'
 import type { MyStylesType } from '../../types/types'
 import HalfContainer from '../UI/HalfContainer'
-import SunContainer from './SunContainer'
+import SunContainer from '../Home/SunContainer'
 import { colors } from '../../styles/colors'
 import { dummy_data } from '../../data/dummy-data'
+import TextSearch from '../FindLocation/TextSearch'
+import { PagesNamesEnum } from '../../enums/enums'
 
-const UpperContainer = () => {
+const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
+  const findLocationPage = pageName === PagesNamesEnum.FIND
   const currentLocationData = dummy_data
   const {
     name,
@@ -25,10 +28,14 @@ const UpperContainer = () => {
   const weatherWind = roundNumber(wind.speed)
 
   return (
-    <HalfContainer bgColor={colors.cyan}>      
-      <Typography sx={styles.mainTitle}>{name}</Typography>
+    <HalfContainer bgColor={colors.cyan}>
+      {findLocationPage ? (
+        <TextSearch />
+      ) : (
+        <Typography sx={styles.mainTitle}>{name}</Typography>
+      )}
       <Typography sx={styles.titleSm}>
-        {doDate(new Date().getTime())}
+        {findLocationPage ? `${name},` : ''} {doDate(new Date().getTime())}
       </Typography>
       <Typography sx={styles.titleL}>
         {temperature}

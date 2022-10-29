@@ -7,7 +7,7 @@ import Router from './router/Router'
 
 const theme = createTheme({
   typography: {
-    fontFamily: ['Poppins', 'sans-serif'].join(','),    
+    fontFamily: ['Poppins', 'sans-serif'].join(','),
   },
   breakpoints: {
     values: {

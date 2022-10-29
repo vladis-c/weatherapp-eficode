@@ -5,9 +5,9 @@ export type WeatherSliceInitialState = {
   currentLocation: LocationType | null
   newLocation: LocationType | null
   currentLocationData: WeatherDataType | null
-  currentLocationForecast: any
+  currentLocationForecast: WeatherDataType | null
   requestedCityData: WeatherDataType | null
-  requestedCityForecast: any
+  requestedCityForecast: WeatherDataType | null
   error: string
   loading: boolean
 }
@@ -16,7 +16,7 @@ const initialState: WeatherSliceInitialState = {
   currentLocation: {
     lat: 0,
     lon: 0,
-    city: "Helsinki"
+    city: 'Helsinki',
   },
   newLocation: null,
   currentLocationData: null,
