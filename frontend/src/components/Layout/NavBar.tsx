@@ -34,8 +34,8 @@ const NavBar = () => {
 
   const cityName =
     requestedCityData.name ||
-    `Current location, ${currentLocationData.name}` ||
-    `Current location, ${currentLocation.city}` ||
+    currentLocationData.name||
+    currentLocation.city ||
     'Dark Weather App'
 
   const pages: PagesNamesType[] = [

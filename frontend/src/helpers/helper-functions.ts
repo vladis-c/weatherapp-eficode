@@ -2,9 +2,7 @@ import { WindEnum } from '../enums/enums'
 
 export const doDate = (d: number | string) => {
   const todaysDate = new Date(d)
-  const previousDay = todaysDate.getTime() - 86400000
-  const previousDate = new Date(previousDay)
-  const dayOfTheWeek = previousDate.toLocaleString('default', {
+  const dayOfTheWeek = todaysDate.toLocaleString('default', {
     weekday: 'short',
   })
   const date = todaysDate.getDate()
