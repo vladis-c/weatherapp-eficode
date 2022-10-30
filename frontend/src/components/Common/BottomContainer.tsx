@@ -9,6 +9,7 @@ import {
   roundNumber,
   doWindDirection,
   doPressure,
+  doTemp
 } from '../../helpers/helper-functions'
 import { colors } from '../../styles/colors'
 import type { MyStylesType, WeatherDataType } from '../../types/types'
@@ -28,11 +29,11 @@ const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
       ? requestedCityForecast
       : currentLocationForecast
     : currentLocationForecast
-  const forecastToDisplay: WeatherDataType[] = isMobile
+  const forecastToDisplay: WeatherDataType[] = isMobile && locationData
     ? locationData.slice(0, 5)
     : locationData.slice(0, 8)
 
-  if (locationData.length === 0) {
+  if (forecastToDisplay.length === 0) {
     return (
       <HalfContainer bgColor={colors.grey}>
         <CircularProgress
@@ -59,9 +60,7 @@ const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
                 }
               />
               <Typography sx={styles.titleSm}>
-                {roundNumber(main?.temp) > 0
-                  ? `+${roundNumber(main?.temp)}`
-                  : `${roundNumber(main?.temp)}`}
+                {doTemp(roundNumber(main?.temp))}
               </Typography>
 
               <Box sx={styles.sectionContainer}>
@@ -94,9 +93,9 @@ const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
             </Box>
           ))}
         </Box>
-        <TextDivider text={`Wind speed, m/s`} b={{ md: -55, sm: 2 }} />
-        <TextDivider text={`Humidity, %`} b={{ md: -115, sm: -48 }} />
-        <TextDivider text={`Pressure, mmHg`} b={{ md: -180, sm: -100 }} />
+        <TextDivider text={`Wind speed, m/s`} sx={{position: "relative", bottom: { md: -55, sm: 2 }}}/>
+        <TextDivider text={`Humidity, %`} sx={{position: "relative", bottom: { md: -115, sm: -48 }}}/>
+        <TextDivider text={`Pressure, mmHg`} sx={{position: "relative", bottom: { md: -180, sm: -100 }}}/>
       </HalfContainer>
     )
   }

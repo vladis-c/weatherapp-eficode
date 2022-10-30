@@ -3,7 +3,6 @@ import { WeatherDataType, LocationType } from '../../types/types'
 
 export type WeatherSliceInitialState = {
   currentLocation: LocationType
-  newLocation: LocationType
   currentLocationData: WeatherDataType
   currentLocationForecast: WeatherDataType[]
   requestedCityData: WeatherDataType
@@ -51,7 +50,6 @@ const initialStateOfLocation = {
 
 const initialState: WeatherSliceInitialState = {
   currentLocation: initialStateOfLocation,
-  newLocation: initialStateOfLocation,
   currentLocationData: initialStateOfWeatherData,
   currentLocationForecast: [],
   requestedCityData: initialStateOfWeatherData,
@@ -76,7 +74,10 @@ const weatherSlice = createSlice({
       state,
       action: PayloadAction<WeatherDataType>
     ) => {
-      state.currentLocationData = action.payload
+      if (action.payload) {
+        state.currentLocationData = action.payload
+      }
+      state.requestedCityData = initialState.requestedCityData
       state.loading = false
       state.error = ''
     },
@@ -95,7 +96,9 @@ const weatherSlice = createSlice({
       state,
       action: PayloadAction<WeatherDataType[]>
     ) => {
-      state.currentLocationForecast = action.payload
+      if (action.payload) {
+        state.currentLocationForecast = action.payload
+      }
       state.loading = false
       state.error = ''
     },
@@ -106,7 +109,14 @@ const weatherSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-    fetchWeatherCityName: (state) => {
+    fetchWeatherCityName: (
+      state,
+      action: PayloadAction<string | undefined>
+    ) => {
+      state.currentLocation = {
+        ...state.currentLocation,
+        city: action.payload
+      }
       state.loading = true
       state.error = ''
     },
@@ -114,7 +124,10 @@ const weatherSlice = createSlice({
       state,
       action: PayloadAction<WeatherDataType>
     ) => {
-      state.requestedCityData = action.payload
+      if (action.payload) {
+        state.requestedCityData = action.payload
+      }
+      state.currentLocationData = initialState.currentLocationData
       state.loading = false
       state.error = ''
     },
@@ -130,7 +143,9 @@ const weatherSlice = createSlice({
       state,
       action: PayloadAction<WeatherDataType[]>
     ) => {
-      state.requestedCityForecast = action.payload
+      if (action.payload) {
+        state.requestedCityForecast = action.payload
+      }
       state.loading = false
       state.error = ''
     },
@@ -154,6 +169,6 @@ export const {
   fetchWeatherCurrentLocationFailed,
   fetchForecastCityName,
   fetchForecastCityNameFailed,
-  fetchForecastCityNameSuccess
+  fetchForecastCityNameSuccess,
 } = weatherSlice.actions
 export default weatherSlice.reducer

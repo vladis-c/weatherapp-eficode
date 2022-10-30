@@ -14,7 +14,6 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import EditLocationIcon from '@mui/icons-material/EditLocation'
-import StarIcon from '@mui/icons-material/Star'
 import {
   StyledAppBar,
   StyledDrawer,
@@ -24,6 +23,7 @@ import { PagesNamesEnum } from '../../enums/enums'
 
 import { colors } from '../../styles/colors'
 import { PagesNamesType } from '../../types/types'
+import FavIcon from '../UI/FavIcon'
 
 const NavBar = () => {
   const [open, setOpen] = useState(false)
@@ -38,11 +38,6 @@ const NavBar = () => {
       title: PagesNamesEnum.FIND,
       icon: <EditLocationIcon sx={{ color: colors.black }} />,
       link: '/find',
-    },
-    {
-      title: PagesNamesEnum.FAVOURITE,
-      icon: <StarIcon sx={{ color: colors.black }} />,
-      link: '/favourites',
     },
   ]
 
@@ -70,6 +65,7 @@ const NavBar = () => {
           >
             Dark Weather App
           </Typography>
+          <FavIcon />
         </Toolbar>
       </StyledAppBar>
       <StyledDrawer variant="permanent" open={open}>

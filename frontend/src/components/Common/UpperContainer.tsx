@@ -1,28 +1,29 @@
-import { Box, Typography, CircularProgress } from '@mui/material'
+import { Typography, CircularProgress} from '@mui/material'
 import {
   doDate,
   doWindDirection,
   roundNumber,
+  doTemp,
 } from '../../helpers/helper-functions'
 import type { MyStylesType } from '../../types/types'
 import HalfContainer from '../UI/HalfContainer'
 import SunContainer from '../Home/SunContainer'
 import { colors } from '../../styles/colors'
-import { dummy_data } from '../../data/dummy-data'
 import TextSearch from '../FindLocation/TextSearch'
 import { PagesNamesEnum } from '../../enums/enums'
 import { useAppSelector } from '../../hooks/redux-hooks'
 
+
 const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   const findLocationPage = pageName === PagesNamesEnum.FIND
   const { weatherSlice } = useAppSelector((state) => state)
+
   const { currentLocationData, requestedCityData } = weatherSlice
   const locationData = findLocationPage
     ? requestedCityData.name !== ''
       ? requestedCityData
       : currentLocationData
     : currentLocationData
-  // const currentLocationData = dummy_data
   const {
     name,
     main,
@@ -31,13 +32,10 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
     wind,
   } = locationData
   const temp = roundNumber(main.temp)
-  const temperature = temp > 0 ? `+${temp}` : `${temp}`
   const weatherDesc = weather[0].description
   const weatherWind = roundNumber(wind.speed)
 
- 
-
-  if ( locationData.name === "" ) {
+  if (locationData.name === '') {
     return (
       <HalfContainer bgColor={colors.cyan}>
         <CircularProgress
@@ -47,7 +45,7 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
     )
   } else {
     return (
-      <HalfContainer bgColor={colors.cyan}>
+      <HalfContainer bgColor={colors.cyan}>        
         {findLocationPage ? (
           <TextSearch />
         ) : (
@@ -57,7 +55,7 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
           {findLocationPage ? `${name},` : ''} {doDate(new Date().getTime())}
         </Typography>
         <Typography sx={styles.titleL}>
-          {temperature}
+          {doTemp(temp)}
           <Typography component="span" sx={styles.titleXs}>
             {`°С`}
           </Typography>
@@ -72,7 +70,7 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
         </Typography>
         <Typography sx={styles.titleSm}>
           Wind {weatherWind} m/s from {doWindDirection(weatherWind)}
-        </Typography>
+        </Typography>       
       </HalfContainer>
     )
   }

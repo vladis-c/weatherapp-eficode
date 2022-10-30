@@ -13,6 +13,7 @@ import {
   setLocation,
 } from '../redux/slices/weatherSlice'
 import { roundNumberToPrecision } from '../helpers/helper-functions'
+import { getLocalStorageItems } from '../redux/slices/historySlice'
 
 const HomePage = () => {
   const dispatch = useAppDispatch()
@@ -52,6 +53,8 @@ const HomePage = () => {
     if (process.env.NODE_ENV === 'development' && isMobile) {
       dispatch(fetchWeatherCurrentLocation())
     }
+    dispatch(getLocalStorageItems())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

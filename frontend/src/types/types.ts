@@ -38,6 +38,7 @@ export interface WeatherDataType {
     sea_level?: number
     grnd_level?: number
     temp_kf?: number
+    [k: string]: any
   }
   visibility: number
   wind: { speed: number; deg: number; [k: string]: any }
@@ -69,4 +70,7 @@ export type CityType = {
   name: string,
   coord: LocationType,
   id: number
+  temp?: string,
+  icon?: string
+  favourite?: boolean  
 }

@@ -64,3 +64,11 @@ export const doPressure = (pres: number) => {
   const coef = 0.750062 // ~coef of expression mmHg/bar . API returns bar, we convert it to mmhg
   return pres * coef
 }
+
+export const doTemp = (temp: number) => {
+  if (temp > 0) {
+    return `+${temp}`
+  } else {
+    return `${temp}`
+  }
+}

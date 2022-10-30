@@ -21,3 +21,8 @@ export enum WindEnum {
   NW = 'NW',
   N = 'N',
 }
+
+export enum LocalStorageEnum {
+  FAVOURITES = "favourites",
+  RECENTS = "recents"
+}

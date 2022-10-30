@@ -1,24 +1,31 @@
-import { Box, Typography, Divider } from '@mui/material'
+import { Box, Typography, Divider, SxProps, Theme } from '@mui/material'
 
 import { colors } from '../../styles/colors'
 import type { MyStylesType } from '../../types/types'
 
 type TextDividerProps = {
   text: string
-b: {
-    md: number| string
-    sm: number| string
-    xs?: number| string
-  }
+  sx?: SxProps<Theme>
+  textColor? : string
 }
 
-const TextDivider = ({ text, b}: TextDividerProps) => {
+const TextDivider = ({ text, sx, textColor }: TextDividerProps) => {
   return (
-    <Box sx={{ ...styles.sticky, bottom: b }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: { md: '65%', sm: '100%' },
+        px: { md: 0, sm: 2 },
+        ...sx,
+      }}
+    >
       <Box sx={{ width: 200 }}>
-        <Typography sx={styles.titleXxs}>{text}</Typography>
+        <Typography sx={{...styles.titleXxs, color: textColor? textColor:colors.winter,}}>{text}</Typography>
       </Box>
-      <Box sx={styles.divider} >
+      <Box sx={styles.divider}>
         <Divider />
       </Box>
     </Box>
@@ -26,15 +33,6 @@ const TextDivider = ({ text, b}: TextDividerProps) => {
 }
 
 const styles: MyStylesType = {
-  sticky: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: { md: '65%', sm: '100%' },
-    px: { md: 0, sm: 2 },
-  },
   divider: {
     backgroundColor: colors.winter,
     width: '100%',
@@ -43,7 +41,6 @@ const styles: MyStylesType = {
   titleXxs: {
     fontWeight: 200,
     fontSize: { md: 14, sm: 12, xs: 12 },
-    color: colors.winter,
   },
 }
 

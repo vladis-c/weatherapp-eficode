@@ -1,127 +1,111 @@
-import React from 'react'
-import {
-  TextField,
-  InputAdornment,
-  Typography,
-  IconButton,
-} from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { TextField, InputAdornment, IconButton } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
-import ClickAwayListener from '@mui/material/ClickAwayListener'
 import SearchIcon from '@mui/icons-material/Search'
 import ClearIcon from '@mui/icons-material/Clear'
 import { isDesktop } from 'react-device-detect'
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from '../UI/MUIComponents'
+import { Accordion, AccordionSummary } from '../UI/MUIComponents'
 import type { MyStylesType } from '../../types/types'
 import { colors } from '../../styles/colors'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks'
 import { setSearchLocationInput } from '../../redux/slices/historySlice'
-import { fetchWeatherCityName, setLocation } from '../../redux/slices/weatherSlice'
+import { fetchWeatherCityName } from '../../redux/slices/weatherSlice'
+import CitiesSearchList from './CitiesSearchList'
 
 const TextSearch = () => {
+  const [focused, setFocused] = useState(false)
   const dispatch = useAppDispatch()
   const { historySlice, weatherSlice } = useAppSelector((state) => state)
-  const { searchLocationInput, favourites, recentSearchHistory } = historySlice
-  const { loading, currentLocation } = weatherSlice
+  const { searchLocationInput } = historySlice
+  const { loading } = weatherSlice
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchLocationInput(e.target.value))
   }
 
+  useEffect(() => {
+    if (!focused) {
+      dispatch(setSearchLocationInput(''))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focused])
+
   return (
-    <Accordion expanded={Boolean(searchLocationInput)}>
+    <Accordion expanded={focused}>
       <AccordionSummary>
-        <ClickAwayListener
-          onClickAway={() => dispatch(setSearchLocationInput(''))}
-        >
-          <TextField
-            value={searchLocationInput}
-            variant="standard"
-            size="small"
-            autoComplete="off"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => dispatch(setSearchLocationInput(''))}
-                  >
-                    <ClearIcon
-                      sx={{
-                        marginLeft: -1,
-                        mb: 1,
-                      }}
-                    />
-                  </IconButton>
-                  <LoadingButton
-                    loading={loading}
-                    variant="outlined"
-                    sx={{
-                      width: { md: 30, sm: 20 },
-                      height: { md: 30, sm: 20 },
-                      color: colors.grey,
-                      backgroundColor: colors.winter,
-                      mb: 1,
-                      boxShadow: 0,
-                      borderColor: colors.grey,
-                      borderWidth: 0.5,
-                    }}
-                    onClick={() => {
-                      dispatch(
-                        setLocation({
-                          ...currentLocation,
-                          city: searchLocationInput,
-                        })
-                      )
-                      dispatch(fetchWeatherCityName())                      
-                    }}
-                  >
-                    Search
-                  </LoadingButton>
-                </InputAdornment>
-              ),
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon
-                    sx={{
-                      marginBottom: 1,
-                      width: { md: 30, sm: 20 },
-                      height: { md: 30, sm: 20 },
-                    }}
-                  />
-                </InputAdornment>
-              ),
-              style: {
-                fontSize: isDesktop ? 16 : 12,
-              },
-              disableUnderline: true,
-            }}
-            sx={{
-              width: '100%',
-              height: { md: 40, sm: 30 },
-              backgroundColor: colors.winter,
-              borderRadius: 4,
-              padding: 1,
-            }}
-            placeholder="Find location..."
-            onChange={handleSearch}
-          />
-        </ClickAwayListener>
+        <TextField
+          onFocus={() => setFocused(true)}
+          value={searchLocationInput}
+          variant="standard"
+          size="small"
+          autoComplete="off"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setFocused(false)}>
+                  <ClearIcon sx={styles.clearIcon} />
+                </IconButton>
+                <LoadingButton
+                  loading={loading}
+                  variant="outlined"
+                  sx={styles.loadingButton}
+                  onClick={() => {
+                    dispatch(fetchWeatherCityName(searchLocationInput))
+                    setFocused(false)
+                  }}
+                >
+                  Search
+                </LoadingButton>
+              </InputAdornment>
+            ),
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon sx={styles.searchIcon} />
+              </InputAdornment>
+            ),
+            style: {
+              fontSize: isDesktop ? 16 : 12,
+            },
+            disableUnderline: true,
+          }}
+          sx={styles.textFieldContainer}
+          placeholder="Find location..."
+          onChange={handleSearch}
+        />
       </AccordionSummary>
-      <AccordionDetails>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-          lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
-      </AccordionDetails>
+
+      <CitiesSearchList onClose={() => setFocused(false)} />
     </Accordion>
   )
 }
 
-const styles: MyStylesType = {}
+const styles: MyStylesType = {
+  textFieldContainer: {
+    width: '100%',
+    height: { md: 40, sm: 30 },
+    backgroundColor: colors.winter,
+    borderRadius: 4,
+    padding: 1,
+  },
+  searchIcon: {
+    marginBottom: 1,
+    width: { md: 30, sm: 20 },
+    height: { md: 30, sm: 20 },
+  },
+  loadingButton: {
+    width: { md: 30, sm: 20 },
+    height: { md: 30, sm: 20 },
+    color: colors.grey,
+    backgroundColor: colors.winter,
+    mb: 1,
+    boxShadow: 0,
+    borderColor: colors.grey,
+    borderWidth: 0.5,
+  },
+  clearIcon: {
+    marginLeft: -1,
+    mb: 1,
+  },
+}
 
 export default TextSearch
