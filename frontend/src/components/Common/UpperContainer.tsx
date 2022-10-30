@@ -1,4 +1,4 @@
-import { Typography, CircularProgress} from '@mui/material'
+import { Typography, CircularProgress, Box } from '@mui/material'
 import {
   doDate,
   doWindDirection,
@@ -12,7 +12,6 @@ import { colors } from '../../styles/colors'
 import TextSearch from '../FindLocation/TextSearch'
 import { PagesNamesEnum } from '../../enums/enums'
 import { useAppSelector } from '../../hooks/redux-hooks'
-
 
 const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   const findLocationPage = pageName === PagesNamesEnum.FIND
@@ -38,21 +37,19 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   if (locationData.name === '') {
     return (
       <HalfContainer bgColor={colors.cyan}>
-        <CircularProgress
-          sx={{ color: colors.winter, width: 200, height: 200 }}
-        />
+        <CircularProgress sx={styles.progress} />
       </HalfContainer>
     )
   } else {
     return (
-      <HalfContainer bgColor={colors.cyan}>        
+      <HalfContainer bgColor={colors.cyan}>
         {findLocationPage ? (
           <TextSearch />
         ) : (
           <Typography sx={styles.mainTitle}>{name}</Typography>
         )}
         <Typography sx={styles.titleSm}>
-          {findLocationPage ? `${name},` : ''} {doDate(new Date().getTime())}
+          {doDate(new Date().getTime())}
         </Typography>
         <Typography sx={styles.titleL}>
           {doTemp(temp)}
@@ -70,7 +67,7 @@ const UpperContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
         </Typography>
         <Typography sx={styles.titleSm}>
           Wind {weatherWind} m/s from {doWindDirection(weatherWind)}
-        </Typography>       
+        </Typography>
       </HalfContainer>
     )
   }
@@ -100,6 +97,7 @@ const styles: MyStylesType = {
     fontSize: 16,
     color: colors.winter,
   },
+  progress: { color: colors.winter, width: 200, height: 200 },
 }
 
 export default UpperContainer

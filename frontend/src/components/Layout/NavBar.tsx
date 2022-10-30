@@ -22,11 +22,21 @@ import {
 import { PagesNamesEnum } from '../../enums/enums'
 
 import { colors } from '../../styles/colors'
-import { PagesNamesType } from '../../types/types'
+import { MyStylesType, PagesNamesType } from '../../types/types'
 import FavIcon from '../UI/FavIcon'
+import { useAppSelector } from '../../hooks/redux-hooks'
 
 const NavBar = () => {
   const [open, setOpen] = useState(false)
+  const { weatherSlice } = useAppSelector((state) => state)
+  const { currentLocation, currentLocationData, requestedCityData } =
+    weatherSlice
+
+  const cityName =
+    requestedCityData.name ||
+    `Current location, ${currentLocationData.name}` ||
+    `Current location, ${currentLocation.city}` ||
+    'Dark Weather App'
 
   const pages: PagesNamesType[] = [
     {
@@ -45,7 +55,7 @@ const NavBar = () => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <StyledAppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar sx={styles.toolbar}>
           <IconButton
             color="inherit"
             onClick={() => setOpen(true)}
@@ -63,9 +73,11 @@ const NavBar = () => {
             component="div"
             sx={{ color: colors.winter }}
           >
-            Dark Weather App
+            {cityName}
           </Typography>
-          <FavIcon />
+          <Box sx={{ transform: `scale(150%)` }}>
+            <FavIcon />
+          </Box>
         </Toolbar>
       </StyledAppBar>
       <StyledDrawer variant="permanent" open={open}>
@@ -108,4 +120,14 @@ const NavBar = () => {
     </Box>
   )
 }
+
+const styles: MyStylesType = {
+  toolbar: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+}
+
 export default NavBar
