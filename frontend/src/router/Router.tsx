@@ -1,5 +1,5 @@
-import { isDesktop } from 'react-device-detect'
 import { Routes, Route } from 'react-router-dom'
+
 import FindLocationPage from '../pages/FindLocationPage'
 import HomePage from '../pages/HomePage'
 

@@ -1,4 +1,5 @@
-import { Typography, CircularProgress, Box } from '@mui/material'
+import { Typography, CircularProgress } from '@mui/material'
+
 import {
   doDate,
   doWindDirection,

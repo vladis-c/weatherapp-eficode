@@ -13,6 +13,7 @@ import {
 } from 'reduxjs-toolkit-persist'
 import hardSet from 'reduxjs-toolkit-persist/lib/stateReconciler/hardSet'
 import { PersistConfig } from 'reduxjs-toolkit-persist/lib/types'
+
 import { rootSaga } from './root-saga'
 import weatherSlice from './slices/weatherSlice'
 import historySlice from './slices/historySlice'

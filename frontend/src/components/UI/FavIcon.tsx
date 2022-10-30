@@ -1,6 +1,7 @@
 import { IconButton } from '@mui/material'
 import StarIcon from '@mui/icons-material/Star'
 import StarOutlineIcon from '@mui/icons-material/StarOutline'
+
 import { colors } from '../../styles/colors'
 import { useAppSelector } from '../../hooks/redux-hooks'
 import { useAddToFavourites } from '../../hooks/use-add-to-favoutites'

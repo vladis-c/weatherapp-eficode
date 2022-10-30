@@ -1,8 +1,8 @@
 import { isMobile } from 'react-device-detect'
+
 import { AccordionDetails } from '../UI/MUIComponents'
 import type { MyStylesType } from '../../types/types'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks'
-
 import { colors } from '../../styles/colors'
 import TextDivider from '../Home/TextDivider'
 import CitySearchListCard from './CitySearchListCard'

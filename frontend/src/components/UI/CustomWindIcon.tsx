@@ -6,6 +6,7 @@ import SouthEastIcon from '@mui/icons-material/SouthEast'
 import SouthIcon from '@mui/icons-material/South'
 import SouthWestIcon from '@mui/icons-material/SouthWest'
 import WestIcon from '@mui/icons-material/West'
+
 import { colors } from '../../styles/colors'
 import { WindEnum } from '../../enums/enums'
 

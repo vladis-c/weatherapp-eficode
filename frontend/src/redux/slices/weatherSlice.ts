@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { WeatherDataType, LocationType } from '../../types/types'
 
 export type WeatherSliceInitialState = {

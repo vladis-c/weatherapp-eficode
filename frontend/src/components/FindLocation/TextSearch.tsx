@@ -4,6 +4,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import SearchIcon from '@mui/icons-material/Search'
 import ClearIcon from '@mui/icons-material/Clear'
 import { isDesktop } from 'react-device-detect'
+
 import { Accordion, AccordionSummary } from '../UI/MUIComponents'
 import type { MyStylesType } from '../../types/types'
 import { colors } from '../../styles/colors'

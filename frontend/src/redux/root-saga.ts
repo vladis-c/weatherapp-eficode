@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects'
+
 import historySaga from './sagas/history.saga'
 import weatherSaga from './sagas/weather.saga'
 

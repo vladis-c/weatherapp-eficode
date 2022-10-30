@@ -8,8 +8,8 @@ This app was created as a part of entry process to one of the tech companies, **
 1. **React** (functional component) has been chosen as a framework for creating the app for its vast amount of libraries and code-frendlinnes.
 2. **TypeScript**has been chosen as a coding language to suppport React framework rather than JavaScript due to type checks and enums to fix errors in development and have no errors during production.
 3. **Material UI** is straping the styling in this React App. Agiliness and responsiveness of MUI is a huge benifit in this kind of applications. 
-4. Usage of **`react-device-detect`** and **Material UI** styling properties made it possible to have a responsive design. Currently the app can be opened on modern smartphones and desktop applications. [See screenshots Section]().
-5. The app is available in **Docker** container for both [frontend]() and [backend]() parts. `docker-compose.yml` in common folder and `Dokerfile`s in each of the folder features the structure of the container tasks. With help of `nodemon` backend has hotreload feature. Frontend hotreload is featured by default.
+4. Usage of **`react-device-detect`** and **Material UI** styling properties made it possible to have a responsive design. Currently the app can be opened on modern smartphones and desktop applications.
+5. The app is available in **Docker** container for both [frontend](./frontend/) and [backend](./backend/) parts. `docker-compose.yml` in common folder and `Dokerfile`s in each of the folder features the structure of the container tasks. With help of `nodemon` backend has hotreload feature. Frontend hotreload is featured by default.
 6. **Redux Toolkit** is used as state managment in the app. 
 7. **Redux Saga** has successfully showed itself as a Redux middleware, and is now used in the app to fetch the data from the api as well.
 8. With help of **Redux Persist** this app can manage to keep the Redux state across the pages and refreshes. 
@@ -47,15 +47,15 @@ There are some options to run the application.
     - frontend: run in the terminal `docker build -t wheatherapp_frontend . && docker run --name wheatherapp_frontend_c -p 9000:9000 -e APPID='<YOUR_API_KEY>' -e MAP_ENDPOINT='https://api.openweathermap.org/data/2.5' -d -i --rm -v /YOUR/ABSOLUTE/PATH/TO/THE_APP/frontend:/frontend -v /frontend/node_modules wheatherapp_frontend`.
 
 * Or locally with desktop:
-- go to [backend]() folder with `cd backend`, and run `nodemon src/index.js` to see life changes or `npm start` to launch classic.
-- go to [frontend]() folder with `cd .. && cd frontend` (if you are coming back from frontend folder) and run `yarn start`.
+- go to [backend](./backend/) folder with `cd backend`, and run `nodemon src/index.js` to see life changes or `npm start` to launch classic.
+- go to [frontend](./frontend/) folder with `cd .. && cd frontend` (if you are coming back from frontend folder) and run `yarn start`.
     - Backend is now running in http://localhost:9000
     - And demo frontend in http://localhost:3000
 
 * Or locally with your phone:
 - make sure to set your environmental variable **ENDPOINT** to http://<YOUR_IP>:3000 instead of http://localhost:3000 in order to run the backend and be able to fetch the data from it.    
-- go to [backend]() folder with `cd backend`, and run `npm start`.
-- go to [frontend]() folder with `cd .. && cd frontend` (if you are coming back from frontend folder) and run `yarn start`.
+- go to [backend](./backend/) folder with `cd backend`, and run `npm start`.
+- go to [frontend](./frontend/) folder with `cd .. && cd frontend` (if you are coming back from frontend folder) and run `yarn start`.
     - Backend is now running in http://<YOUR_IP>:9000
     - And demo frontend in http://<YOUR_IP>:3000
 

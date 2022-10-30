@@ -6,6 +6,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from '@mui/material/AccordionSummary'
+
 import { isMobile } from 'react-device-detect'
 import { colors } from '../../styles/colors'
 

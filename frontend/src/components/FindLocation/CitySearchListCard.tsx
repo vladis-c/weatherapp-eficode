@@ -1,5 +1,6 @@
 import { Typography, Box, Avatar, Button } from '@mui/material'
 import { isMobile } from 'react-device-detect'
+
 import type { MyStylesType } from '../../types/types'
 import FavIcon from '../UI/FavIcon'
 import { colors } from '../../styles/colors'

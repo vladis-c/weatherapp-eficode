@@ -3,7 +3,6 @@ import AppsIcon from '@mui/icons-material/Apps'
 import { isMobile } from 'react-device-detect'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import { dummy_forecast } from '../../data/dummy-data'
 import {
   doTime,
   roundNumber,
@@ -21,7 +20,6 @@ import { useAppSelector } from '../../hooks/redux-hooks'
 
 const BottomContainer = ({ pageName }: { pageName: PagesNamesEnum }) => {
   const findLocationPage = pageName === PagesNamesEnum.FIND
-  // const currentLocationForecast = dummy_forecast
   const { weatherSlice } = useAppSelector((state) => state)
   const { currentLocationForecast, requestedCityForecast } = weatherSlice
   const locationData = findLocationPage
