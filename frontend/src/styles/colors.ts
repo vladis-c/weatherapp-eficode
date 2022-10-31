@@ -16,5 +16,6 @@ export const colors: ThemeColorsType = {
   winter: '#EEEEEE',
   yellow: '#FFD700',
   lightBlue: '#1e77a7',
+  purple: '#53036e',
   transparent: 'transparent',
 }
