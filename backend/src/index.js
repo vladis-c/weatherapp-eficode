@@ -3,7 +3,7 @@ import Router from 'koa-router';
 import fetch from 'node-fetch';
 import cors from 'kcors';
 
-const appId = process.env.APPID || 'f37c813cac355aa1320e169f0b54cff0';
+const appId = process.env.APPID || '';
 const mapURI = process.env.MAP_ENDPOINT || 'https://api.openweathermap.org/data/2.5';
 const targetCity = process.env.TARGET_CITY || 'Helsinki,fi';
 
