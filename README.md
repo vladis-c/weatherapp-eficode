@@ -36,6 +36,9 @@ This app was created as a part of entry process to one of the tech companies, **
 
 ## Run the app
 
+1. `cd backend` and run `npm install`
+2. `cd .. && cd frontend` (if you are still in backend folder) and run `yarn install`
+
 There are some options to run the application.
 
 * Either with Docker: 
