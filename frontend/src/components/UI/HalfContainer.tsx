@@ -15,7 +15,7 @@ const HalfContainer = ({ children, bgColor, bottom }: HalfContainerProps) => {
         ...styles.container,
         backgroundColor: bgColor,
         pt: bottom ? { md: 10, sm: 3 } : { md: 12, sm: 10, xs: 8 },
-        px: { xl: 20, md: 20, sm: 0 },
+        px: { xl: 30, md: 30, sm: 0 },
         pb: bottom ? { md: 6, sm: 0 } : 2,
         mb: bottom ? 10 : 0,
       }}
