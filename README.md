@@ -48,7 +48,7 @@ There are some options to run the application.
 
 * Or locally with desktop:
 - go to [backend](./backend/) folder with `cd backend`, and run `nodemon src/index.js` to see life changes or `npm start` to launch classic.
-- go to [frontend](./frontend/) folder with `cd .. && cd frontend` (if you are coming back from frontend folder) and run `yarn start`.
+- go to [frontend](./frontend/) folder with `cd .. && cd frontend` (if you are coming back from backend folder) and run `yarn start`.
     - Backend is now running in http://localhost:9000
     - And demo frontend in http://localhost:3000
 
