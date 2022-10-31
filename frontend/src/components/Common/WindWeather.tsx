@@ -28,7 +28,7 @@ const styles: MyStylesType = {
   sectionContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'flex-start',
     width: '100%',
     mt: 0,
@@ -44,7 +44,7 @@ const styles: MyStylesType = {
   arrowContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'flex-start',
     width: '10%',
   },
@@ -54,10 +54,11 @@ const styles: MyStylesType = {
     my: { md: 2, sm: 1, xs: 0 },
     color: colors.winter,
     pt: 1,
+    mx: 1,
   },
   titleXxs: {
     fontWeight: 200,
-    fontSize: { md: 14, sm: 12, xs: 12 },
+    fontSize: { xl: 16, md: 14, sm: 12, xs: 12 },
     color: colors.winter,
   },
 }
