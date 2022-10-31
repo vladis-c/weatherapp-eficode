@@ -1,7 +1,7 @@
 import { ApiEndpointsEnum } from '../../enums/enums'
 import { LocationType, WeatherDataType } from '../../types/types'
 
-const baseURL = process.env.ENDPOINT || 'http://192.168.1.88:9000/api'
+const baseURL = process.env.ENDPOINT || 'http://localhost:3000/api'
 
 export const fetchWeatherFromApi = async (
   currentLocation: LocationType,
