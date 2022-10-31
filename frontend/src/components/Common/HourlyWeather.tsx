@@ -1,4 +1,5 @@
 import { Box, Typography, Avatar } from '@mui/material'
+
 import { doTime, doTemp, roundNumber } from '../../helpers/helper-functions'
 import { MyStylesType, WeatherDataType } from '../../types/types'
 import { colors } from '../../styles/colors'

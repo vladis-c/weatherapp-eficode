@@ -67,10 +67,10 @@ export interface MyStylesType {
 }
 
 export type CityType = {
-  name: string,
-  coord: LocationType,
+  name: string
+  coord: LocationType
   id: number
-  temp?: string,
+  temp?: string
   icon?: string
-  favourite?: boolean  
+  favourite?: boolean
 }

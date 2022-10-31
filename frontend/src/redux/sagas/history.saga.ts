@@ -17,7 +17,7 @@ function* setCityToFavouritesSaga(action: PayloadAction<number>) {
   const requestedCity = requestedCityData.id === action.payload
   const recentSearchHistoryCity = recentSearchHistory.find(
     (city) => city.id === action.payload
-  )  
+  )
 
   if (recentSearchHistoryCity) {
     yield put(setCityToFavouritesSuccess(recentSearchHistoryCity))
@@ -59,7 +59,6 @@ function* setCityToFavouritesSaga(action: PayloadAction<number>) {
     )
     return
   }
-  
 }
 
 function* setCityToFavouritesWatcher() {

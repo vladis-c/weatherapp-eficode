@@ -18,7 +18,7 @@ const CitySearchListCard = ({
   temp,
   icon,
   id,
-  onOpenCity
+  onOpenCity,
 }: CitySearchListCardProps) => {
   return (
     <Box sx={styles.card}>
@@ -40,7 +40,7 @@ const CitySearchListCard = ({
           width: '20%',
         }}
       >
-        <FavIcon id={id}/>
+        <FavIcon id={id} />
       </Box>
     </Box>
   )
@@ -55,7 +55,6 @@ const styles: MyStylesType = {
     alignItems: 'center',
     mb: 2,
     borderBottom: 0.1,
-    
   },
   name: {
     fontSize: isMobile ? 14 : 18,
