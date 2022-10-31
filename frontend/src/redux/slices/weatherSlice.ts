@@ -116,7 +116,7 @@ const weatherSlice = createSlice({
     ) => {
       state.currentLocation = {
         ...state.currentLocation,
-        city: action.payload
+        city: action.payload,
       }
       state.loading = true
       state.error = ''

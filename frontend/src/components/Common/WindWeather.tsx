@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+
 import { roundNumber, doWindDirection } from '../../helpers/helper-functions'
 import { MyStylesType, WeatherDataType } from '../../types/types'
 import { colors } from '../../styles/colors'

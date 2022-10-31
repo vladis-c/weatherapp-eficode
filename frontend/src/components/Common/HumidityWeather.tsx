@@ -9,7 +9,7 @@ const HumidityWeather = ({ forecast }: { forecast: WeatherDataType[] }) => {
   return (
     <Box sx={styles.wrapContainer}>
       {forecast.map(({ dt, main }) => (
-        <Box sx={styles.sectionContainer} key = {dt}>
+        <Box sx={styles.sectionContainer} key={dt}>
           <AppsIcon sx={styles.humidityIcon} />
           <Typography sx={styles.titleSm}>
             {roundNumber(main.humidity)}

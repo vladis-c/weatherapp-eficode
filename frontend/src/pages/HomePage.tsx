@@ -54,7 +54,7 @@ const HomePage = () => {
       dispatch(fetchWeatherCurrentLocation())
     }
     dispatch(getLocalStorageItems())
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

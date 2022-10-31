@@ -41,7 +41,6 @@ const CitiesSearchList = ({ onClose }: { onClose: () => void }) => {
           name={name}
           temp={temp}
           icon={icon}
-        
           onOpenCity={() => {
             dispatch(fetchWeatherCityName(name))
             onClose()

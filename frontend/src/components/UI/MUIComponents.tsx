@@ -6,8 +6,8 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from '@mui/material/AccordionSummary'
-
 import { isMobile } from 'react-device-detect'
+
 import { colors } from '../../styles/colors'
 
 const drawerWidth = 240
@@ -93,7 +93,7 @@ export const Accordion = styled((props: AccordionProps) => (
   width: isMobile ? '90%' : '50%',
   height: isMobile ? 40 : 30,
   borderWidth: 0,
-  marginBottom: 6
+  marginBottom: 6,
 }))
 
 export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
@@ -104,7 +104,6 @@ export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   position: 'absolute',
   top: 50,
   borderWidth: 0,
-  
 }))
 
 export const AccordionSummary = styled((props: AccordionSummaryProps) => (
@@ -112,13 +111,13 @@ export const AccordionSummary = styled((props: AccordionSummaryProps) => (
 ))(({ theme }) => ({
   backgroundColor: colors.transparent,
   borderRadius: 40,
-  width: "100%",
-  height: "100%",
+  width: '100%',
+  height: '100%',
   flexDirection: 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
   },
   '& .MuiAccordionSummary-content': {
     marginLeft: theme.spacing(1),
-  }
+  },
 }))
