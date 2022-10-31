@@ -6,7 +6,7 @@ import type { MyStylesType } from '../../types/types'
 type TextDividerProps = {
   text: string
   sx?: SxProps<Theme>
-  textColor? : string
+  textColor?: string
 }
 
 const TextDivider = ({ text, sx, textColor }: TextDividerProps) => {
@@ -19,11 +19,19 @@ const TextDivider = ({ text, sx, textColor }: TextDividerProps) => {
         alignItems: 'center',
         width: { md: '65%', sm: '100%' },
         px: { md: 0, sm: 2 },
+        mb: 1,
         ...sx,
       }}
     >
       <Box sx={{ width: 200 }}>
-        <Typography sx={{...styles.titleXxs, color: textColor? textColor:colors.winter,}}>{text}</Typography>
+        <Typography
+          sx={{
+            ...styles.titleXxs,
+            color: textColor ? textColor : colors.winter,
+          }}
+        >
+          {text}
+        </Typography>
       </Box>
       <Box sx={styles.divider}>
         <Divider />
